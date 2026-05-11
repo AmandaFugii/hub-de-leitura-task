@@ -17,12 +17,28 @@ describe('Testes End To End do fluxo de cadastro e login', () => {
     Use as boas práticas aprendidas até agora para estruturar o teste.
     */
 
+
     beforeEach(() => {
-        // Configurações iniciais, se necessário
+        cy.visit('register.html')
     });
 
 
     it('Deve fazer o cadastro e validar o login com o usuário cadastrado', () => {
-        // Criar todo o fluxo aqui dentro deste único "it"
+        let email = `teste${Date.now()}@teste.com`
+        cy.get('#name').type('Amanda Fugii')
+        cy.get('#email').type(email)
+        cy.get('#phone').type('13991618998')
+        cy.get('#password').type('Senha@123')
+        cy.get('#confirm-password').type('Senha@123')
+        cy.get('#terms-agreement').check()
+        cy.get('#register-btn').click()
+        cy.visit('login.html')
+        cy.get('#email').type('teste90@teste.com')
+        cy.get('#password').type('Senha@123')
+        cy.get('#login-btn').click()
+// validação 
+
+        cy.url().should ('include', 'dashboard')
     });
+
 });
