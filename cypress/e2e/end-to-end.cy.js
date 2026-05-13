@@ -24,21 +24,17 @@ describe('Testes End To End do fluxo de cadastro e login', () => {
 
 
     it('Deve fazer o cadastro e validar o login com o usuário cadastrado', () => {
-        let email = `teste${Date.now()}@teste.com`
         cy.get('#name').type('Amanda Fugii')
-        cy.get('#email').type(email)
+        cy.get('#email').type('teste500@teste.com')
         cy.get('#phone').type('13991618998')
         cy.get('#password').type('Senha@123')
         cy.get('#confirm-password').type('Senha@123')
         cy.get('#terms-agreement').check()
         cy.get('#register-btn').click()
         cy.visit('login.html')
-        cy.get('#email').type('teste90@teste.com')
-        cy.get('#password').type('Senha@123')
-        cy.get('#login-btn').click()
-// validação 
+        
+        cy.login('teste500@teste.com','Senha@123')
 
-        cy.url().should ('include', 'dashboard')
     });
 
 });
